@@ -51,19 +51,21 @@ export default function Productslist() {
 
         //    </div>
 
-
+let quantity=1;
   return (
     <>
     <div className="container my-3">
               <h1 className='text-center'>My Products</h1> 
               <div className="row"> 
+            
               {productsArr.map((item)=>{
                   return <div className="col-md-4 my-3" key={item.img}>
-                     <Product title={item.title} img={item.imageUrl} price={item.price} />
+                     <Product key={item.title} title={item.title} img={item.imageUrl} price={item.price} quantity={quantity} />
                   </div> 
               })} 
               </div> 
               </div> 
+              
     </>
   )
 }
