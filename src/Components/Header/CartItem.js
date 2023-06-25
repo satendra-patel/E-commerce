@@ -6,18 +6,19 @@ import ProductContext from '../../store/product-context';
 
 export default function CartItem(props) {
   const cartState=useContext(ProductContext);
-  const removeItem=(id)=>{
+  const removeItem=(event)=>{
     
-    cartState.removeItem(props);
+    cartState.removeItem(props.id);
+    
     
 
 
   }
   
-  return (<>
+  return (
     
  
-      
+      <div>
         <tr>
         <td>{ <Figure.Image
         width={80}
@@ -26,12 +27,12 @@ export default function CartItem(props) {
         src={props.img}
       />}</td>
           <td>{props.title}</td>
-          <td>{props.price}$</td>
+          <td>{props.price}</td>
           <td>{props.quantity}<Button onClick={removeItem} className='mx-2' variant="danger">X</Button>{' '}</td>
           
         </tr>
       
    
-  </>
+  </div>
   )
 }

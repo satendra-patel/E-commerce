@@ -1,14 +1,16 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Cart from './Cart';
 import { Link } from 'react-router-dom';
 import Button from "react-bootstrap/Button";
+import AuthContext from '../../store/auth-context';
 
 export default function Header() {
-  return (<>
-   
+  const authctx=useContext(AuthContext);
+  const login=authctx.isLoggenIn;
+  return (
     <Navbar bg="dark" expand="lg" variant='dark'>
       <Container>
         <Navbar.Brand href="#home">E-Comm Store</Navbar.Brand>
@@ -20,6 +22,12 @@ export default function Header() {
                   Home
                 </Button>
               </Link>
+              { login && 
+              <Link to="/store">
+                <Button variant="outline-light" size="sm" className="mx-2">
+                  Store
+                </Button>
+              </Link> }
               <Link to="/about">
                 <Button variant="outline-light" size="sm" className="mx-2">
                   About
@@ -36,6 +44,6 @@ export default function Header() {
         <Cart/>
       </Container>
     </Navbar>
-    </>
+    
   )
 }

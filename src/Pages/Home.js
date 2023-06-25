@@ -1,15 +1,28 @@
 import React from 'react'
-import Header from '../Components/Header/Header'
-import Productslist from '../Components/Products/Productslist'
+
+import MainHeader from '../Components/Header/MainHeader'
+
 import CartState from '../store/CartState'
+import pic from '../asset/pic.jpg'
+import Figure from 'react-bootstrap/Figure';
 
 
 export default function Home() {
-  return (
+  return (<div>
     <CartState>
 
-    <Header/>
-    <Productslist/>
-    </CartState>
+<MainHeader/>
+
+</CartState>
+<Figure>
+      <Figure.Image
+        width={2000}
+        height={720}
+        alt="171x180"
+        src={pic}
+      />
+     
+    </Figure>
+    </div>
   )
 }

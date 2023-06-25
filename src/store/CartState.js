@@ -1,60 +1,50 @@
-import React,{useState} from 'react';
-import ProductContext from './product-context';
+import React, { useState } from "react";
+
+import ProductContext from "./product-context";
 
 export default function CartState(props) {
-    
-    
   const [items, setitems] = useState([]);
-  
-  const addItemToCartHandler = (props) => {
-    let quantity=0
-  cartState.items.forEach(item=>{
-    quantity=quantity+ Number(item.quantity);
 
-  })
-    
-    //   
-    // }
-
-    // setitems([...items,props]);
+  const addItemToCartHandler = (item) => {
     let temp = [...items];
-    let itemidx = temp.findIndex((i) => i.title === props.title);
-    if (itemidx === -1) {
-      temp = [...temp, props];
+
+    let indxOfItem = temp.findIndex((i) => i.id === item.id);
+
+    if (indxOfItem === -1) {
+      temp = [...temp, item];
+      setitems([...temp]);
     } else {
-      temp[itemidx].quantity = (temp[itemidx].quantity) + 1;
+      temp[indxOfItem].quantity = Number(temp[indxOfItem].quantity) + 1;
+      temp = [...temp];
     }
-
     setitems([...temp]);
-    
-    
-    
   };
+
   const removeItemFromCartHandler = (id) => {
-    
-     let temp = [...items];
-    // let itemidx = temp.findIndex((i) => i.title === id.name);
-    // if(temp[itemidx].quantity>1){
-
-    // temp[itemidx].quantity = Number(temp[itemidx].quantity) - 1;
-    // }
-    // else{
-      temp=temp.filter((i) => i.title !== id.title);
-    
-    
+    let temp = [...items];
+    let indxOfItem = temp.findIndex((i) => i.id === id);
+    if (temp[indxOfItem].quantity > 1) {
+      temp[indxOfItem].quantity = Number(temp[indxOfItem].quantity) - 1;
+    } else {
+      temp = temp.filter((i) => i.id !== id);
+    }
     setitems([...temp]);
-    
+  };
+  const getcart = (data) => {
+    console.log("chal rrrrr");
+    let temp = [...items, data];
+    setitems(temp);
   };
 
- const cartState = {
+  const cartState = {
     items: items,
+    fetchcart: getcart,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
   };
   return (
     <ProductContext.Provider value={cartState}>
-      {console.log('inside main',items)}
-           {props.children}
+      {props.children}
     </ProductContext.Provider>
-  )
+  );
 }
